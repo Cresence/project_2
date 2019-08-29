@@ -84,7 +84,7 @@ function getMovie() {
     row.append(
       "<a href='" +
         response.Website +
-        "' class='btn btn-info' target='_blank' > Wartch Now </a>"
+        "' class='btn btn-info' target='_blank'> Wartch Now </a>"
     );
     $(".movie-detail").prepend(row);
   });
