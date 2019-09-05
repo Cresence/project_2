@@ -27,20 +27,24 @@ function displayMovieInfo() {
       method: "GET"
     }).then(function(response) {
       console.log(response);
-      // $(".movie-box").text(JSON.stringify(response));
+      // $(".movie_box").text(JSON.stringify(response));
       var row = $("<div>");
-      row.addClass("image-box col-sm-3");
-      row.append("<img src=" + response.Poster + " />");
+      row.addClass("image-box col-sm-6 col-md-3");
+      row.append(
+        "<div class='poster-box'><img src='" +
+          response.Poster +
+          "' onerror=\"this.onerror=null;this.src='../images/not-found.png';\"/></div>"
+      );
       row.append("<p class='hover-description'>" + response.Plot + "</p>");
       row.append("<h5>" + response.Title + "</h5>");
       row.append(
         "<a href='/detail' id='" +
           response.imdbID +
-          "' class='btn btn-info more-detail'>" +
+          "' class='btn btn-theme more-detail'>" +
           "More Detail" +
-          "</a>"
+          "</a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
       );
-      $(".movie-box").prepend(row);
+      $(".movie_box").prepend(row);
     });
   }
 }
@@ -62,14 +66,20 @@ function getMovie() {
     method: "GET"
   }).then(function(response) {
     console.log(response);
-    // $(".movie-box").text(JSON.stringify(response));
+    // $(".movie_box").text(JSON.stringify(response));
 
     $(".img-box").append(
-      "<img src=" + response.Poster + " class='img-fluid'/>"
+      "<img src='" +
+        response.Poster +
+        "' class='img-fluid' onerror=\"this.onerror=null;this.src='../images/not-found.png';\"/>"
     );
     var row = $("<div>");
     row.addClass("movie-description");
     row.append("<h2>" + response.Title + "</h2>");
+    row.append(
+      "<a href='#' data-toggle='modal' data-target='#vidioModal' class='movie-trailer'>" +
+        "<span class='fa fa-play'></span> Play Trailer</a>"
+    );
     row.append("<p>" + response.Plot + "</p>");
 
     row.append("<p> <strong> Genre: </strong>" + response.Genre + "</p>");
@@ -84,12 +94,104 @@ function getMovie() {
     row.append(
       "<a href='" +
         response.Website +
-        "' class='btn btn-info' target='_blank'> Wartch Now </a>"
+        "' class='btn btn-theme' target='_blank'> Wartch Now </a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
     );
     $(".movie-detail").prepend(row);
+
+    var imdbId = response.imdbID;
+    var qURL =
+      "https://api.themoviedb.org/3/movie/" +
+      imdbId +
+      "/videos?api_key=e40035ded7723bb4c0164d21d83a0845";
+    $.ajax({
+      url: qURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      var videos = response.results[0].key;
+      console.log(videos);
+      $(".trailer-box").append(
+        "<iframe id='trailer' src='https://www.youtube.com/embed/" +
+          videos +
+          "'  frameborder='0' allow='autoplay'; encrypted-media' allowfullscreen></iframe>"
+      );
+    });
   });
 }
 
 $(document).on("click", ".search-movie", function() {
-  $(".movie-detail").html("display", "none");
+  //$(".movie_box").html("display", "none");
+  //  document.getElementById(elementID).innerHTML = "";
+  $(".search-result").html("");
+  var searchInput = $("#search-input")
+    .val()
+    .trim();
+  console.log(searchInput);
+  if (searchInput !== "") {
+    $(".main-container").html("");
+    var queryURL =
+      "https://www.omdbapi.com/?s=" +
+      searchInput +
+      "&type=movie&apikey=trilogy";
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      if (response.Response === "True") {
+        for (var i = 0; i < response.Search.length; i++) {
+          var row = $("<div>");
+          row.addClass("image-box col-sm-6 col-md-3");
+          row.append(
+            "<div class='poster-box'><img src='" +
+              response.Search[i].Poster +
+              "' onerror=\"this.onerror=null;this.src='../images/not-found.png';\"/></div>"
+          );
+          if (response.Search[i].Plot === undefined) {
+            row.append(
+              "<p class='hover-description'>" +
+                response.Search[i].Title +
+                "</p>"
+            );
+          } else {
+            row.append(
+              "<p class='hover-description'>" + response.Search[i].Plot + "</p>"
+            );
+          }
+          row.append("<h5>" + response.Search[i].Title + "</h5>");
+          row.append(
+            "<a href='/detail' id='" +
+              response.Search[i].imdbID +
+              "' class='btn btn-theme more-detail'>" +
+              "More Detail" +
+              "</a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
+          );
+          $(".search-result").prepend(row);
+        }
+      } else {
+        $(".search-result").prepend("<h1>Result Not found</h1>");
+        console.log("Result not found");
+      }
+    });
+  } else {
+    // alert("Please enter any movie name before search");
+    $("#alertMovieSearch").modal("toggle");
+  }
+});
+
+var imdbId = "tt0450278";
+var qURL =
+  "https://api.themoviedb.org/3/movie/" +
+  imdbId +
+  "/videos?api_key=e40035ded7723bb4c0164d21d83a0845";
+// var queURL =
+//   "https://api.themoviedb.org/discover/movie?certification_country=US&certification.lte=G&sort_by=popularity.desc?api_key=e40035ded7723bb4c0164d21d83a0845";
+// var qURL =
+//   "https://api.themoviedb.org/movie/" +
+//   "discover/movie?sort_by=popularity.desc?api_key=e40035ded7723bb4c0164d21d83a0845";
+$.ajax({
+  url: qURL,
+  method: "GET"
+}).then(function(response) {
+  console.log("Response : " + response);
 });
