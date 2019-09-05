@@ -1,11 +1,41 @@
-<div class="container">
-    <h1>Hello</h1>
-  
+<div class="container outer-box">
+    <br/>
     <div class="row ">
        <div class="col-sm-3 img-box"></div>
-       <div class="col-sm-9 movie-detail"></div>
+       <div class="col-sm-9">
+           
+           <div class="movie-detail">
+
+           </div>
+       </div>
     </div>
+</div>
+
+{{!-- Video ModalPopup --}}
+
+<div class="modal fade show" id="vidioModal" >
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h4 class="text-center">Play Trailer </h4>
+        <div class="trailer-box"></div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-theme close_me" data-dismiss="modal">Close</button>
+      
+      </div>
+      
+    </div>
+  </div>
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
 <script src="/js/movie.js"></script>
+<script>
+    $('.close_me').click(function (e) {
+  var $videoEl = $('.trailer-box').find('iframe');
+  $videoEl.attr('src', $videoEl.attr('src'));
+});
+</script>
