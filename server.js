@@ -36,7 +36,7 @@ app.set("view engine", "handlebars");
 require("./routes/apiRoutes.js")(app);
 require("./routes/htmlRoutes.js")(app);
 
-const authRoute = require("./routes/auth.js")(app, passport);
+const authRoute = require("./routes/auth.js")(app);
 
 // local passport strategies
 require('./config/passport.js')(passport, models.user);
