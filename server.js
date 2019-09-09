@@ -7,7 +7,6 @@ var bodyParser = require("body-parser");
 var passport = require("passport");
 var db = require("./models");
 var app = express();
-var authRoute = require('./routes/auth.js')(app);
 
 var PORT = process.env.PORT || 3000;
 
@@ -16,18 +15,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
 
+// bodyparser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// passport
 app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); //session secret
 app.use(passport.initialize());
 app.use(passport.session()); //persistent login sessions
 
 
 // Handlebars
-app.engine(
-  "handlebars",
-  exphbs({
+app.engine("handlebars", exphbs({
     defaultLayout: "main"
   })
 );
@@ -36,7 +35,8 @@ app.set("view engine", "handlebars");
 // Routes
 require("./routes/apiRoutes.js")(app);
 require("./routes/htmlRoutes.js")(app);
-require("./routes/auth.js")(app, passport);
+
+const authRoute = require("./routes/auth.js")(app, passport);
 
 // local passport strategies
 require('./config/passport.js')(passport, models.user);
