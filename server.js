@@ -33,13 +33,13 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 // Routes
-require("./routes/apiRoutes.js")(app);
+require("./routes/apiRoutes.js")(app, passport);
 require("./routes/htmlRoutes.js")(app);
 
-const authRoute = require("./routes/auth.js")(app);
+const authRoute = require("./routes/auth.js")(app, passport);
 
 // local passport strategies
-require('./config/passport.js')(passport, models.user);
+require('./config/passport.js')(passport, db.user);
 
 var syncOptions = { force: false };
 
