@@ -7,7 +7,7 @@ module.exports = function(app, passport) {
 
   app.get("/signin", authController.signin);
 
-  app.post("/api/signup", function(req, res) {
+  app.post("/signup", function(req, res) {
     db.User.create({
       email: req.body.email,
       password: req.body.password
