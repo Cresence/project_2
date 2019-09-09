@@ -1,5 +1,5 @@
 module.exports = function(sequelize, Sequelize) {
-  let User = sequelize.define("User", {
+  var User = sequelize.define("User", {
     // Giving the User model a name of type STRING
     id: {
       autoIncrement: true,
