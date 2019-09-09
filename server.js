@@ -1,13 +1,14 @@
 require("dotenv").config();
+
 var express = require("express");
 var exphbs = require("express-handlebars");
 var session = require("express-session");
 var bodyParser = require("body-parser");
 var passport = require("passport");
 var db = require("./models");
+var app = express();
 var authRoute = require('./routes/auth.js')(app);
 
-var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Middleware

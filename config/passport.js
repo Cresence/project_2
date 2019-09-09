@@ -5,49 +5,51 @@ module.exports = function(passport, user) {
     const LocalStrategy = require('passport-local').Strategy;
 }
 
-passport.use('local-signup', new LocalStrategy (
-    {
-        usernameField: 'email',
-        passwordField: 'password',
-        passReqToCallback: true
-    },
-    function(req, email, password, done) {
-        const generateHash = function(password) {
-            return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
-        };
-    
-    User.findOne({
-        where: {
-            email: email
-        }
-    }).then(function(user) {     
-        if (user)
-        {   
-            return done(null, false, {
-                message: 'That email is already taken'
-            });
-        } 
-        else
+    passport.use('local-signup', new LocalStrategy (
         {
-            var userPassword = generateHash(password);
-            var data =
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true
+        },
+        function(req, email, password, done) {
+            const generateHash = function(password) {
+                return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+            };
+    
+            User.findOne({
+                where: {
+                    email: email
+                }
+            }).then(function(user) {     
+                if (user)
+                {   
+                    return done(null, false, {
+                        message: 'That email is already taken'
+                    });
+                } 
+                else
                 {
-                    email: email,
-                    password: userPassword,    
-                    firstname: req.body.firstname,    
-                    lastname: req.body.lastname    
+                    var userPassword = generateHash(password);
+                    var data =
+                        {
+                            email: email,
+                            password: userPassword,    
+                            firstname: req.body.firstname,    
+                            lastname: req.body.lastname    
                 };
 
-            User.create(data).then(function(newUser, created) {    
-                if (!newUser) {     
-                    return done(null, false);    
-                }
-                if (newUser) {    
-                    return done(null, newUser);     
+                    User.create(data).then(function(newUser, created) {    
+                        if (!newUser) {     
+                            return done(null, false);    
+                        }
+                        if (newUser) {    
+                            return done(null, newUser);     
+                        }     
+                    });     
                 }     
-            });     
-        }     
-    })}));
+            });
+        }
+    ));
 
 // serialize
 passport.serializeUser(function(user, done) {
