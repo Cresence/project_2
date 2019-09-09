@@ -33,8 +33,12 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+require("./routes/apiRoutes.js")(app);
+require("./routes/htmlRoutes.js")(app);
+require("./routes/auth.js")(app, passport);
+
+// local passport strategies
+require('./config/passport.js')(passport, models.user);
 
 var syncOptions = { force: false };
 
