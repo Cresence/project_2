@@ -39,4 +39,7 @@ $('.close_me').click(function (e) {
   $videoEl.attr('src', $videoEl.attr('src'));
 });
 
+$("#loginFormModal").on('hidden.bs.modal', function () {
+  alert('The modal is completely hidden now!');
+});
 </script>
