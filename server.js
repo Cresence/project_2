@@ -41,7 +41,7 @@ const authRoute = require("./routes/auth.js")(app, passport);
 // local passport strategies
 require('./config/passport.js')(passport, db.user);
 
-var syncOptions = { force: false };
+var syncOptions = { force: true };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`

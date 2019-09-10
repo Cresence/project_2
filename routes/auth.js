@@ -1,6 +1,6 @@
 var authController = require("../controllers/authcontroller.js");
 var passport = require("../config/passport.js");
-
+var db = require("../models")
 
 module.exports = function(app, passport) {
   app.get("/signup", authController.signup);
@@ -13,7 +13,7 @@ module.exports = function(app, passport) {
       password: req.body.password
     })
       .then(function() {
-        res.redirect(307, "/api/login");
+        res.redirect(200, "/");
       })
       .catch(function(err) {
         res.status(401).json(err);
