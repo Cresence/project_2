@@ -1,17 +1,16 @@
 let bCrypt = require("bcrypt-nodejs");
-var passport = require('passport');
+var passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
 module.exports = function(passport, user) {
   const User = user;
+  return User;
 };
-
 
 // serialize
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
-
 
 // deserialize
 passport.deserializeUser(function(id, done) {
@@ -24,9 +23,9 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-
 // passport local sign up
-passport.use(new LocalStrategy(
+passport.use(
+  new LocalStrategy(
     {
       usernameField: "email",
       passwordField: "password",
@@ -37,14 +36,12 @@ passport.use(new LocalStrategy(
         return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
       };
 
-      User.findOne({where: {email: email}}).then(function(user) {
-        
+      User.findOne({ where: { email: email } }).then(function(user) {
         if (user) {
           return done(null, false, {
             message: "That email is already taken"
           });
-        } 
-        else {
+        } else {
           var userPassword = generateHash(password);
           var data = {
             email: email,
@@ -56,6 +53,7 @@ passport.use(new LocalStrategy(
               return done(null, false);
             }
             if (newUser) {
+              console.log(created);
               return done(null, newUser);
             }
           });
@@ -64,4 +62,3 @@ passport.use(new LocalStrategy(
     }
   )
 );
-

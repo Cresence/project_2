@@ -20,13 +20,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // passport
-app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); //session secret
+app.use(
+  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+); //session secret
 app.use(passport.initialize());
 app.use(passport.session()); //persistent login sessions
 
-
 // Handlebars
-app.engine("handlebars", exphbs({
+app.engine(
+  "handlebars",
+  exphbs({
     defaultLayout: "main"
   })
 );
@@ -37,9 +40,10 @@ require("./routes/apiRoutes.js")(app, passport);
 require("./routes/htmlRoutes.js")(app);
 
 const authRoute = require("./routes/auth.js")(app, passport);
+console.log(authRoute);
 
 // local passport strategies
-require('./config/passport.js')(passport, db.user);
+require("./config/passport.js")(passport, db.user);
 
 var syncOptions = { force: true };
 
@@ -61,6 +65,5 @@ db.sequelize.sync(syncOptions).then(function() {
 });
 
 // auth login
-
 
 module.exports = app;
