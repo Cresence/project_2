@@ -8,7 +8,7 @@ module.exports = function(app) {
       res.render("index", {
         msg: "Welcome To My Website!",
         examples: dbExamples
-      }); 
+      });
     });
   });
   app.post("/", function(req, res) {
