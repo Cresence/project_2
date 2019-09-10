@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": "740Washington",
-    "database": "logindb",
+    "password": "root",
+    "database": "testDB",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "root",
     "database": "testdb",
     "host": "localhost",
     "dialect": "mysql",
