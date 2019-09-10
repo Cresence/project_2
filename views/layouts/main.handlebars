@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,15 +15,15 @@
 </head>
 
 <body>
-
-<div class="container outer-box">
+<div class="outer-container-box">
+<div class="container">
   <br/>
   <div class="row">
     <div class="col-sm-8">
       <div id="logo">
         <a href="/">
-        <h1>Logo</h1>
-        {{!-- <img src="images/logo.png" width="150px"/> --}}
+        {{!-- <h1>Logo</h1> --}}
+        <img src="images/logo.png" width="150px"/>
         </a>
       </div>
       
@@ -33,7 +32,7 @@
      
       <div class="input-group">
         <input type="text" class="form-control" id="search-input" placeholder="Search for any Movie">
-        <button  class="search-movie">
+        <button  class="search-movie" type="submit">
         
           <i class="fa fa-search" aria-hidden="true"></i>
         </button>
@@ -52,10 +51,10 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="popular" id="popular_movi">Popular Movies</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="top_rated">Top Rated Movies</a>
       </li>    
     </ul>
     <ul class="navbar-nav ml-auto">
@@ -72,18 +71,19 @@
 <div class="main-container">
   {{{body}}}
 </div>
- <div class="container outer-box">
+ <div class="container outer-box ">
    <div class="row search-result"></div>
  </div>
-  <footer class="footer">
+  
+</div>
+<footer class="footer">
     <div class="container">
       <p>@ Copyrigt 2019</p>
     </div>
   </footer>
-
 {{!-- Login ModalPopup --}}
 
-<div class="modal fade show" id="loginFormModal" >
+<div class="modal fade show " id="loginFormModal" >
   <div class="modal-dialog">
     <div class="modal-content">
       <!-- Modal body -->
@@ -137,7 +137,8 @@
         </div>
   
         <button type="submit" id="signup-btn" class="btn btn-theme">Register Now</button>
-        
+        <button type="submit" id="signup-gmail-btn" class="btn btn-theme">
+          <i class="fa fa-google-plus" aria-hidden="true"></i> Sign-Up With Gmail</button>
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
