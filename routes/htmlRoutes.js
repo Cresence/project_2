@@ -10,6 +10,10 @@ module.exports = function(app) {
       });
     });
   });
+  app.post("/", function(req, res) {
+    res.status(200);
+    console.log(req.body);
+  });
   app.get("/detail", function(req, res) {
     var movieId = this.id;
     res.render("detail", {
