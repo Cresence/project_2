@@ -11,6 +11,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <title>Cinema Snapshot</title>
+  <script src="/public/js/login.js"></script>
+  <script src="/public/js/signup.js"></script>
+
 </head>
 
 <body>
@@ -93,7 +96,7 @@
           </span> 
         </div>
         <h4 class="text-center">Login Form </h4>
-        <form class="create-form">
+        <form class="login-form">
   
         <div class="form-group">
           <label for="email">Email Id:</label>
@@ -132,19 +135,18 @@
         </div>
         <h4 class="text-center">Sign-Up Form </h4>
         <form class="create-form">
-       
         <div class="form-group">
           <label for="email">Email Id :</label>
           <input type="text" id="email" name="email" class="form-control">
         </div>
-       
+
         <div class="form-group">
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" class="form-control">
         </div>
         <div class="form-group">
           <label for="password">Confirm Password:</label>
-          <input type="password" id="conformPassword" name="conformPassword" class="form-control">
+          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control">
         </div>
   
         <button type="submit" id="signup-btn" class="btn btn-theme">Register Now</button>
