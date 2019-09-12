@@ -3,12 +3,17 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+    console.log(db.User);
+    db.User.findAll({}).then(function(dbExamples) {
       res.render("index", {
         msg: "Welcome To My Website!",
         examples: dbExamples
       });
     });
+  });
+  app.post("/", function(req, res) {
+    res.status(200);
+    console.log(req.body);
   });
   app.get("/detail", function(req, res) {
     var movieId = this.id;
