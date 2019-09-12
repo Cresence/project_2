@@ -188,7 +188,7 @@ function searchData() {
               "More Detail" +
               "</a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
           );
-          $(".search-result").prepend(row);
+          $(".search-result").append(row);
         }
       } else {
         $(".search-result").prepend(
