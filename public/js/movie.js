@@ -243,10 +243,10 @@ $.ajax({
   }
 });
 
-var nowPlayingURL =
+var topRatedURL =
   "https://api.themoviedb.org/3/movie/top_rated?api_key=e40035ded7723bb4c0164d21d83a0845&language=en-US&page=1";
 $.ajax({
-  url: nowPlayingURL,
+  url: topRatedURL,
   method: "GET"
 }).then(function(response) {
   for (var i = 0; i < response.results.length; i++) {
