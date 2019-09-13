@@ -188,7 +188,7 @@ function searchData() {
               "More Detail" +
               "</a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
           );
-          $(".search-result").prepend(row);
+          $(".search-result").append(row);
         }
       } else {
         $(".search-result").prepend(
@@ -243,10 +243,10 @@ $.ajax({
   }
 });
 
-var nowPlayingURL =
+var topRatedURL =
   "https://api.themoviedb.org/3/movie/top_rated?api_key=e40035ded7723bb4c0164d21d83a0845&language=en-US&page=1";
 $.ajax({
-  url: nowPlayingURL,
+  url: topRatedURL,
   method: "GET"
 }).then(function(response) {
   for (var i = 0; i < response.results.length; i++) {
@@ -282,35 +282,32 @@ $.ajax({
 });
 
 // Getting references to our form and input
-var signUpForm = $(".create-form");
-var emailInput = $("#signup-email");
-var passwordInput = $("#signup-password");
+// var signUpForm = $(".create-form");
+var emailInput = $("input#signup-email.form-control");
+var passwordInput = $("input#signup-password.form-control");
 
 // When the signup button is clicked, we validate the email and password are not blank
-signUpForm.on("submit", function(event) {
+$(document).on("submit", ".create-form", function(event) {
   event.preventDefault();
-  // var dbUser = {
-  //   email: emailInput.val(),
-  //   password: passwordInput.val()
-  // };
 
-  // if (!dbUser.email || !dbUser.password) {
-  //   return;
-  // }
+  if (emailInput.val() === "" || passwordInput.val() === "") {
+    console.log("Field is blank! Try Again!");
+    return;
+  }
   // If we have an email and password, run the signUpUser function
   // signUpUser(dbUser.email, dbUser.password);
   $.post("/api/signup", {
-    email: email,
-    password: password
+    email: emailInput.val(),
+    password: passwordInput.val()
   })
-    .then(function(data) {
-      console.log(data);
-      // window.location.replace("/");
+    .then(function() {
+      // console.log(data);
+      window.location.replace("/");
       // If there's an error, handle it by throwing up a bootstrap alert
     })
     .catch(handleLoginErr);
-  emailInput.val("");
-  passwordInput.val("");
+  // emailInput.val("");
+  // passwordInput.val("");
 });
 
 // Does a post to the signup route. If successful, we are redirected to the members page

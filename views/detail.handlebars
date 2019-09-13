@@ -18,6 +18,11 @@
     <div class="modal-content">
       <!-- Modal body -->
       <div class="modal-body">
+        <div class="text-center top-icon">
+          <span>
+            <i class="fa fa-play-circle fa-spin-hover" aria-hidden="true"></i>
+          </span> 
+        </div>
         <h4 class="text-center">Play Trailer </h4>
         <div class="trailer-box"></div>
       </div>
@@ -30,16 +35,19 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
 <script src="/js/movie.js"></script>
 <script>
 $('.close_me').click(function (e) {
   var $videoEl = $('.trailer-box').find('iframe');
   $videoEl.attr('src', $videoEl.attr('src'));
+  console.log('The modal is completely hidden now!');
 });
 
-$("#loginFormModal").on('hidden.bs.modal', function () {
-  alert('The modal is completely hidden now!');
+$("#vidioModal").on('hide.bs.modal', function () {
+  var $videoEl = $('.trailer-box').find('iframe');
+  $videoEl.attr('src', $videoEl.attr('src'));
+  console.log('The modal is completely hidden now!');
 });
+
 </script>
