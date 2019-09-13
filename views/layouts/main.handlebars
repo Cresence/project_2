@@ -8,8 +8,6 @@
   <link rel="stylesheet" href="/styles/styles.css" media="screen" title="no title" charset="utf-8">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="/public/js/login.js"></script>
-  <script src="/public/js/signup.js"></script>
   <title>Home Page</title>
 
 </head>
@@ -78,7 +76,7 @@
 </div>
 <footer class="footer">
     <div class="container">
-      <p>@ Copyrigt 2019</p>
+      <p>@ Copyright 2019</p>
     </div>
   </footer>
 {{!-- Login ModalPopup --}}
@@ -93,11 +91,11 @@
   
         <div class="form-group">
           <label for="email">Email Id:</label>
-          <input type="email" id="email-id" name="email" class="form-control">
+          <input type="email" id="login-email" name="email" class="form-control">
         </div>
         <div class="form-group">
           <label for="password">Password:</label>
-          <input type="password" id="passwd" name="email" class="form-control">
+          <input type="password" id="login-password" name="email" class="form-control">
         </div>
   
         <button type="submit" id="login-btn" class="btn btn-theme">Login</button>
@@ -125,20 +123,21 @@
         <form class="create-form">
         <div class="form-group">
           <label for="email">Email Id :</label>
-          <input type="text" id="email" name="email" class="form-control">
+          <input type="text" id="signup-email" class="form-control">
         </div>
         <div class="form-group">
           <label for="password">Password:</label>
-          <input type="password" id="password" name="password" class="form-control">
+          <input type="password" id="signup-password" class="form-control">
         </div>
         <div class="form-group">
           <label for="password">Confirm Password:</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control">
+          <input type="password" id="signup-confirmPassword" class="form-control">
         </div>
   
         <button type="submit" id="signup-btn" class="btn btn-theme">Register Now</button>
         <button type="submit" id="signup-gmail-btn" class="btn btn-theme">
           <i class="fa fa-google-plus" aria-hidden="true"></i> Sign-Up With Gmail</button>
+          </form>
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">

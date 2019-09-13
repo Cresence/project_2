@@ -3,8 +3,7 @@ require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
 var session = require("express-session");
-var bodyParser = require("body-parser");
-var passport = require("passport");
+var passport = require("./config/passport");
 var db = require("./models");
 var app = express();
 
@@ -14,10 +13,6 @@ var PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
-
-// bodyparser
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 // passport
 app.use(
@@ -39,11 +34,7 @@ app.set("view engine", "handlebars");
 require("./routes/apiRoutes.js")(app, passport);
 require("./routes/htmlRoutes.js")(app);
 
-const authRoute = require("./routes/auth.js")(app, passport);
-console.log(authRoute);
-
-// local passport strategies
-require("./config/passport.js")(passport, db.user);
+// require("./routes/auth.js")(app, passport);
 
 var syncOptions = { force: true };
 

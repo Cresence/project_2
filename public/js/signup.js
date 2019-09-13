@@ -1,22 +1,23 @@
 $(document).ready(function() {
   // Getting references to our form and input
-  var signUpForm = $("form.create_form");
-  var emailInput = $("input#email-id");
-  var passwordInput = $("input#passwd");
+  // var signUpForm = $("form.create-form");
+  var emailInput = $("input#email.form-control");
+  var passwordInput = $("input#password.form-control");
 
   // When the signup button is clicked, we validate the email and password are not blank
-  signUpForm.on("button", function(event) {
+  $(document).on("click", "#signup-btn", function(event) {
     event.preventDefault();
-    var userData = {
+    console.log("I've been clicked");
+    var dbUser = {
       email: emailInput.val().trim(),
       password: passwordInput.val().trim()
     };
 
-    if (!userData.email || !userData.password) {
-      return;
-    }
+    // if (!dbUser.email || !dbUser.password) {
+    //   return;
+    // }
     // If we have an email and password, run the signUpUser function
-    signUpUser(userData.email, userData.password);
+    signUpUser(dbUser.email, dbUser.password);
     emailInput.val("");
     passwordInput.val("");
   });
@@ -30,7 +31,7 @@ $(document).ready(function() {
     })
       .then(function(data) {
         console.log(data);
-        window.location.replace("/members");
+        window.location.replace("/");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);

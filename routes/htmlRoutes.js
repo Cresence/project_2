@@ -4,10 +4,10 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     console.log(db.User);
-    db.User.findAll({}).then(function(dbExamples) {
+    db.User.findAll({}).then(function(dbUsers) {
       res.render("index", {
         msg: "Welcome To My Website!",
-        examples: dbExamples
+        users: dbUsers
       });
     });
   });
