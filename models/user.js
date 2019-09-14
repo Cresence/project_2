@@ -20,7 +20,7 @@ module.exports = function(sequelize, Sequelize) {
     },
 
     username: {
-      type: Sequelize.TEXT,
+      type: Sequelize.TEXT
     },
 
     about: {

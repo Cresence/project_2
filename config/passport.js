@@ -7,8 +7,8 @@ const LocalStrategy = require("passport-local").Strategy;
 passport.use(
   new LocalStrategy(
     {
-      usernameField: "email",
-      passwordField: "password"
+      username: "email",
+      password: "password"
     },
     function(email, password, done) {
       const generateHash = function(password) {

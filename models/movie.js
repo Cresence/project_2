@@ -1,16 +1,34 @@
 module.exports = function(sequelize, DataTypes) {
   var Movie = sequelize.define("Movie", {
     title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
+      type: DataTypes.STRING
     },
-    body: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      len: [1]
+    plot: {
+      type: DataTypes.TEXT
+    },
+    genre: {
+      type: DataTypes.STRING
+    },
+    released: {
+      type: DataTypes.STRING
+    },
+    rated: {
+      type: DataTypes.STRING
+    },
+    imdbRating: {
+      type: DataTypes.STRING
+    },
+    director: {
+      type: DataTypes.STRING
+    },
+    writer: {
+      type: DataTypes.STRING
+    },
+    actors: {
+      type: DataTypes.STRING
+    },
+    website: {
+      type: DataTypes.STRING
     }
   });
 

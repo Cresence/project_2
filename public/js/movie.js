@@ -43,7 +43,9 @@ function displayMovieInfo() {
           response.imdbID +
           "' class='btn btn-theme more-detail'>" +
           "More Detail" +
-          "</a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
+          "</a> <a href='#' id='" +
+          response.imdbID +
+          "' onClick='reply_click()' class='btn btn-theme save-movie'>Save Now</a>"
       );
       $(".movie_box").prepend(row);
     });
@@ -184,7 +186,7 @@ function searchData() {
           row.append(
             "<a href='/detail' id='" +
               response.Search[i].imdbID +
-              "' class='btn btn-theme more-detail'>" +
+              "' onClick='reply_click() class='btn btn-theme more-detail'>" +
               "More Detail" +
               "</a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
           );
@@ -200,114 +202,119 @@ function searchData() {
     $("#alertMovieSearch").modal("toggle");
   }
 }
-var popularURL =
-  " https://api.themoviedb.org/3/discover/movie?api_key=e40035ded7723bb4c0164d21d83a0845&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
+// var popularURL =
+//   " https://api.themoviedb.org/3/discover/movie?api_key=e40035ded7723bb4c0164d21d83a0845&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
 
-$.ajax({
-  url: popularURL,
-  method: "GET"
-}).then(function(response) {
-  // console.log("Response ");
-  // console.log(response);
-  for (var i = 0; i < response.results.length; i++) {
-    var queURL =
-      "https://api.themoviedb.org/3/movie/" +
-      response.results[i].id +
-      "?api_key=e40035ded7723bb4c0164d21d83a0845";
-    $.ajax({
-      url: queURL,
-      method: "GET"
-    }).then(function(res) {
-      // console.log("Response for id" + res);
-      // console.log(res);
-      var row = $("<div>");
-      row.addClass("image-box col-sm-6 col-md-3");
-      row.append(
-        "<div class='poster-box'><img src='https://image.tmdb.org/t/p/w500" +
-          res.backdrop_path +
-          "' onerror=\"this.onerror=null;this.src='../images/not-found.png';\"/></div>"
-      );
-      row.append(
-        "<p class='hover-description'><span>" + res.overview + "</span></p>"
-      );
-      row.append("<h5>" + res.original_title + "</h5>");
-      row.append(
-        "<a href='/detail' id='" +
-          res.imdb_id +
-          "' class='btn btn-theme more-detail'>" +
-          "More Detail" +
-          "</a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
-      );
-      $(".popular_movie_box").prepend(row);
-    });
-  }
-});
+// $.ajax({
+//   url: popularURL,
+//   method: "GET"
+// }).then(function(response) {
+//   // console.log("Response ");
+//   // console.log(response);
+//   for (var i = 0; i < response.results.length; i++) {
+//     var queURL =
+//       "https://api.themoviedb.org/3/movie/" +
+//       response.results[i].id +
+//       "?api_key=e40035ded7723bb4c0164d21d83a0845";
+//     $.ajax({
+//       url: queURL,
+//       method: "GET"
+//     }).then(function(res) {
+//       // console.log("Response for id" + res);
+//       // console.log(res);
+//       var row = $("<div>");
+//       row.addClass("image-box col-sm-6 col-md-3");
+//       row.append(
+//         "<div class='poster-box'><img src='https://image.tmdb.org/t/p/w500" +
+//           res.backdrop_path +
+//           "' onerror=\"this.onerror=null;this.src='../images/not-found.png';\"/></div>"
+//       );
+//       row.append(
+//         "<p class='hover-description'><span>" + res.overview + "</span></p>"
+//       );
+//       row.append("<h5>" + res.original_title + "</h5>");
+//       row.append(
+//         "<a href='/detail' id='" +
+//           res.imdb_id +
+//           "' onClick='reply_click() class='btn btn-theme more-detail'>" +
+//           "More Detail" +
+//           "</a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
+//       );
+//       $(".popular_movie_box").prepend(row);
+//     });
+//   }
+// });
 
-var topRatedURL =
-  "https://api.themoviedb.org/3/movie/top_rated?api_key=e40035ded7723bb4c0164d21d83a0845&language=en-US&page=1";
-$.ajax({
-  url: topRatedURL,
-  method: "GET"
-}).then(function(response) {
-  for (var i = 0; i < response.results.length; i++) {
-    var queURL =
-      "https://api.themoviedb.org/3/movie/" +
-      response.results[i].id +
-      "?api_key=e40035ded7723bb4c0164d21d83a0845";
-    $.ajax({
-      url: queURL,
-      method: "GET"
-    }).then(function(res) {
-      var row = $("<div>");
-      row.addClass("image-box col-sm-6 col-md-3");
-      row.append(
-        "<div class='poster-box'><img src='https://image.tmdb.org/t/p/w500" +
-          res.backdrop_path +
-          "' onerror=\"this.onerror=null;this.src='../images/not-found.png';\"/></div>"
-      );
-      row.append(
-        "<p class='hover-description'><span>" + res.overview + "</span></p>"
-      );
-      row.append("<h5>" + res.original_title + "</h5>");
-      row.append(
-        "<a href='/detail' id='" +
-          res.imdb_id +
-          "' class='btn btn-theme more-detail'>" +
-          "More Detail" +
-          "</a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
-      );
-      $(".top_rated_movies_box").prepend(row);
-    });
-  }
-});
+// var topRatedURL =
+//   "https://api.themoviedb.org/3/movie/top_rated?api_key=e40035ded7723bb4c0164d21d83a0845&language=en-US&page=1";
+// $.ajax({
+//   url: topRatedURL,
+//   method: "GET"
+// }).then(function(response) {
+//   for (var i = 0; i < response.results.length; i++) {
+//     var queURL =
+//       "https://api.themoviedb.org/3/movie/" +
+//       response.results[i].id +
+//       "?api_key=e40035ded7723bb4c0164d21d83a0845";
+//     $.ajax({
+//       url: queURL,
+//       method: "GET"
+//     }).then(function(res) {
+//       var row = $("<div>");
+//       row.addClass("image-box col-sm-6 col-md-3");
+//       row.append(
+//         "<div class='poster-box'><img src='https://image.tmdb.org/t/p/w500" +
+//           res.backdrop_path +
+//           "' onerror=\"this.onerror=null;this.src='../images/not-found.png';\"/></div>"
+//       );
+//       row.append(
+//         "<p class='hover-description'><span>" + res.overview + "</span></p>"
+//       );
+//       row.append("<h5>" + res.original_title + "</h5>");
+//       row.append(
+//         "<a href='/detail' id='" +
+//           res.imdb_id +
+//           "' onClick='reply_click()' class='btn btn-theme more-detail'>" +
+//           "More Detail" +
+//           "</a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
+//       );
+//       $(".top_rated_movies_box").prepend(row);
+//     });
+//   }
+// });
 
 // Getting references to our form and input
 // var signUpForm = $(".create-form");
-var emailInput = $("input#signup-email.form-control");
-var passwordInput = $("input#signup-password.form-control");
 
 // When the signup button is clicked, we validate the email and password are not blank
 $(document).on("submit", ".create-form", function(event) {
   event.preventDefault();
 
-  if (emailInput.val() === "" || passwordInput.val() === "") {
+  // If we have an email and password, run the signUpUser function
+  // signUpUser(dbUser.email, dbUser.password);
+  var emailSignupInput = $("#signup-email.form-control").val();
+  var passwordSignupInput = $("#signup-password.form-control").val();
+
+  if (emailSignupInput === "" || passwordSignupInput === "") {
     console.log("Field is blank! Try Again!");
     return;
   }
-  // If we have an email and password, run the signUpUser function
-  // signUpUser(dbUser.email, dbUser.password);
+
   $.post("/api/signup", {
-    email: emailInput.val(),
-    password: passwordInput.val()
+    email: emailSignupInput,
+    password: passwordSignupInput
   })
     .then(function() {
       // console.log(data);
+      // console.log("Line 305 of movie.js ran");
+      // console.log(emailSignupInput);
+      // console.log(passwordSignupInput);
       window.location.replace("/");
       // If there's an error, handle it by throwing up a bootstrap alert
     })
     .catch(handleLoginErr);
-  // emailInput.val("");
-  // passwordInput.val("");
+  // emailSignupInput.val("");
+  // passwordSignupInput.val("");
 });
 
 // Does a post to the signup route. If successful, we are redirected to the members page
@@ -331,39 +338,93 @@ function handleLoginErr(err) {
 }
 
 // Getting references to our form and inputs
-var loginForm = $("form.login-form");
-var emailInput = $("input#email-id");
-var passwordInput = $("input#passwd");
+// var loginForm = $("form.login-form");
 
 // When the form is submitted, we validate there's an email and password entered
-loginForm.on("login-btn", function(event) {
+$(document).on("submit", ".login-form", function(event) {
   event.preventDefault();
-  var userData = {
-    email: emailInput.val().trim(),
-    password: passwordInput.val().trim()
-  };
 
-  if (!userData.email || !userData.password) {
+  var emailLoginInput = $("#login-email.form-control")
+    .val()
+    .trim();
+  var passwordLoginInput = $("#login-password.form-control")
+    .val()
+    .trim();
+
+  if (emailLoginInput === "" || passwordLoginInput === "") {
+    console.log("No empty values!");
     return;
   }
-
-  // If we have an email and password we run the loginUser function and clear the form
-  // loginUser(userData.email, userData.password);
-  emailInput.val("");
-  passwordInput.val("");
-});
-
-// loginUser does a post to our "api/login" route and if successful, redirects us the the members page
-function loginUser(email, password) {
-  $.post("/api/login", {
-    email: email,
-    password: password
+  $.post("/api/signin", {
+    email: emailLoginInput,
+    password: passwordLoginInput
   })
     .then(function() {
-      window.location.replace("/members");
+      window.location.replace("/");
       // If there's an error, log the error
     })
     .catch(function(err) {
       console.log(err);
     });
+
+  // If we have an email and password we run the loginUser function and clear the form
+  // loginUser(userData.email, userData.password);
+  // emailLoginInput.val("");
+  // passwordLoginInput.val("");
+});
+
+// loginUser does a post to our "api/login" route and if successful, redirects us the the members page
+// function loginUser(email, password) {
+//   $.post("/api/login", {
+//     email: email,
+//     password: password
+//   })
+//     .then(function() {
+//       window.location.replace("/members");
+//       // If there's an error, log the error
+//     })
+//     .catch(function(err) {
+//       console.log(err);
+//     });
+// }
+// eslint-disable-next-line camelcase
+function reply_click() {
+  console.log(event.srcElement.id);
+  $.ajax({
+    url: `https://www.omdbapi.com?i=${event.srcElement.id}&apikey=trilogy`
+  }).then(function(res) {
+    const {
+      Title,
+      Plot,
+      Genre,
+      Released,
+      Rated,
+      imdbRating,
+      Director,
+      Writer,
+      Actors,
+      Website
+    } = res;
+    console.log(res);
+    $.post("/api/movie", {
+      title: Title,
+      plot: Plot,
+      genre: Genre,
+      released: Released,
+      rated: Rated,
+      imdbRating,
+      director: Director,
+      writer: Writer,
+      actors: Actors,
+      website: Website
+    })
+      .then(function() {
+        window.location.replace("/");
+      })
+      .catch(function(err) {
+        throw err;
+      });
+  });
 }
+
+reply_click();
