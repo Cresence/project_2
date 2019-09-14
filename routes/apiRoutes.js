@@ -5,7 +5,8 @@ module.exports = function(app, passport) {
   app.post(
     "/api/signin",
     passport.authenticate("local", {
-      failureRedirect: "/api/signin"
+      successRedirect: "/",
+      failureRedirect: "/"
     }),
     function(req, res) {
       db.User.findOne({
@@ -25,11 +26,40 @@ module.exports = function(app, passport) {
       password: req.body.password
     })
       .then(function() {
-        res.redirect("/");
+        res.redirect("/signin");
       })
       .catch(function(err) {
         console.log(err);
         res.json(err);
       });
   });
+
+  app.post("/api/movie", function(req, res) {
+    console.log("2", req.body);
+    db.Movie.create({
+      title: req.body.title,
+      plot: req.body.plot,
+      genre: req.body.genre,
+      released: req.body.released,
+      rated: req.body.rated,
+      imdbRating: req.body.imdbRating,
+      director: req.body.director,
+      writer: req.body.writer,
+      actors: req.body.actors,
+      website: req.body.website
+    })
+      .then(function() {
+        console.log("Movie sucessfully saved!");
+      })
+      .catch(function(err) {
+        console.log(err);
+        res.json(err);
+      });
+  });
+
+  // app.get("/api/movie", function(req, res) {
+  //   db.Movie.findAll({ where: title > 1 }).then(function(dbMovie) {
+  //     res.json(dbMovie);
+  //   });
+  // });
 };

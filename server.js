@@ -5,6 +5,7 @@ var exphbs = require("express-handlebars");
 var session = require("express-session");
 var passport = require("./config/passport");
 var db = require("./models");
+var d3 = require("d3");
 var app = express();
 
 var PORT = process.env.PORT || 3000;
@@ -57,4 +58,4 @@ db.sequelize.sync(syncOptions).then(function() {
 
 // auth login
 
-module.exports = app;
+module.exports = (app, d3);

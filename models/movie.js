@@ -37,7 +37,7 @@ module.exports = function(sequelize, DataTypes) {
     // A Movie can't be created without an User due to the foreign key constraint
     Movie.belongsTo(models.User, {
       foreignKey: {
-        allowNull: false
+        allowNull: true
       }
     });
   };

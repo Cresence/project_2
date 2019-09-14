@@ -202,86 +202,90 @@ function searchData() {
     $("#alertMovieSearch").modal("toggle");
   }
 }
-// var popularURL =
-//   " https://api.themoviedb.org/3/discover/movie?api_key=e40035ded7723bb4c0164d21d83a0845&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
+var popularURL =
+  " https://api.themoviedb.org/3/discover/movie?api_key=e40035ded7723bb4c0164d21d83a0845&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
 
-// $.ajax({
-//   url: popularURL,
-//   method: "GET"
-// }).then(function(response) {
-//   // console.log("Response ");
-//   // console.log(response);
-//   for (var i = 0; i < response.results.length; i++) {
-//     var queURL =
-//       "https://api.themoviedb.org/3/movie/" +
-//       response.results[i].id +
-//       "?api_key=e40035ded7723bb4c0164d21d83a0845";
-//     $.ajax({
-//       url: queURL,
-//       method: "GET"
-//     }).then(function(res) {
-//       // console.log("Response for id" + res);
-//       // console.log(res);
-//       var row = $("<div>");
-//       row.addClass("image-box col-sm-6 col-md-3");
-//       row.append(
-//         "<div class='poster-box'><img src='https://image.tmdb.org/t/p/w500" +
-//           res.backdrop_path +
-//           "' onerror=\"this.onerror=null;this.src='../images/not-found.png';\"/></div>"
-//       );
-//       row.append(
-//         "<p class='hover-description'><span>" + res.overview + "</span></p>"
-//       );
-//       row.append("<h5>" + res.original_title + "</h5>");
-//       row.append(
-//         "<a href='/detail' id='" +
-//           res.imdb_id +
-//           "' onClick='reply_click() class='btn btn-theme more-detail'>" +
-//           "More Detail" +
-//           "</a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
-//       );
-//       $(".popular_movie_box").prepend(row);
-//     });
-//   }
-// });
+$.ajax({
+  url: popularURL,
+  method: "GET"
+}).then(function(response) {
+  // console.log("Response ");
+  // console.log(response);
+  for (var i = 0; i < response.results.length; i++) {
+    var queURL =
+      "https://api.themoviedb.org/3/movie/" +
+      response.results[i].id +
+      "?api_key=e40035ded7723bb4c0164d21d83a0845";
+    $.ajax({
+      url: queURL,
+      method: "GET"
+    }).then(function(res) {
+      // console.log("Response for id" + res);
+      // console.log(res);
+      var row = $("<div>");
+      row.addClass("image-box col-sm-6 col-md-3");
+      row.append(
+        "<div class='poster-box'><img src='https://image.tmdb.org/t/p/w500" +
+          res.backdrop_path +
+          "' onerror=\"this.onerror=null;this.src='../images/not-found.png';\"/></div>"
+      );
+      row.append(
+        "<p class='hover-description'><span>" + res.overview + "</span></p>"
+      );
+      row.append("<h5>" + res.original_title + "</h5>");
+      row.append(
+        "<a href='/detail' id='" +
+          res.imdb_id +
+          "' onClick='reply_click() class='btn btn-theme more-detail'>" +
+          "More Detail" +
+          "</a> <a href='#' id='" +
+          res.imdb_id +
+          "' onClick='reply_click()' class='btn btn-theme save-movie'>Save Now</a>"
+      );
+      $(".popular_movie_box").prepend(row);
+    });
+  }
+});
 
-// var topRatedURL =
-//   "https://api.themoviedb.org/3/movie/top_rated?api_key=e40035ded7723bb4c0164d21d83a0845&language=en-US&page=1";
-// $.ajax({
-//   url: topRatedURL,
-//   method: "GET"
-// }).then(function(response) {
-//   for (var i = 0; i < response.results.length; i++) {
-//     var queURL =
-//       "https://api.themoviedb.org/3/movie/" +
-//       response.results[i].id +
-//       "?api_key=e40035ded7723bb4c0164d21d83a0845";
-//     $.ajax({
-//       url: queURL,
-//       method: "GET"
-//     }).then(function(res) {
-//       var row = $("<div>");
-//       row.addClass("image-box col-sm-6 col-md-3");
-//       row.append(
-//         "<div class='poster-box'><img src='https://image.tmdb.org/t/p/w500" +
-//           res.backdrop_path +
-//           "' onerror=\"this.onerror=null;this.src='../images/not-found.png';\"/></div>"
-//       );
-//       row.append(
-//         "<p class='hover-description'><span>" + res.overview + "</span></p>"
-//       );
-//       row.append("<h5>" + res.original_title + "</h5>");
-//       row.append(
-//         "<a href='/detail' id='" +
-//           res.imdb_id +
-//           "' onClick='reply_click()' class='btn btn-theme more-detail'>" +
-//           "More Detail" +
-//           "</a> <a href='#' class='btn btn-theme save-movie'>Save Now</a>"
-//       );
-//       $(".top_rated_movies_box").prepend(row);
-//     });
-//   }
-// });
+var topRatedURL =
+  "https://api.themoviedb.org/3/movie/top_rated?api_key=e40035ded7723bb4c0164d21d83a0845&language=en-US&page=1";
+$.ajax({
+  url: topRatedURL,
+  method: "GET"
+}).then(function(response) {
+  for (var i = 0; i < response.results.length; i++) {
+    var queURL =
+      "https://api.themoviedb.org/3/movie/" +
+      response.results[i].id +
+      "?api_key=e40035ded7723bb4c0164d21d83a0845";
+    $.ajax({
+      url: queURL,
+      method: "GET"
+    }).then(function(res) {
+      var row = $("<div>");
+      row.addClass("image-box col-sm-6 col-md-3");
+      row.append(
+        "<div class='poster-box'><img src='https://image.tmdb.org/t/p/w500" +
+          res.backdrop_path +
+          "' onerror=\"this.onerror=null;this.src='../images/not-found.png';\"/></div>"
+      );
+      row.append(
+        "<p class='hover-description'><span>" + res.overview + "</span></p>"
+      );
+      row.append("<h5>" + res.original_title + "</h5>");
+      row.append(
+        "<a href='/detail' id='" +
+          res.imdb_id +
+          "' onClick='reply_click()' class='btn btn-theme more-detail'>" +
+          "More Detail" +
+          "</a> <a href='#' id='" +
+          res.imdb_id +
+          "' onClick='reply_click()' class='btn btn-theme save-movie'>Save Now</a>"
+      );
+      $(".top_rated_movies_box").prepend(row);
+    });
+  }
+});
 
 // Getting references to our form and input
 // var signUpForm = $(".create-form");
@@ -422,7 +426,7 @@ function reply_click() {
         window.location.replace("/");
       })
       .catch(function(err) {
-        throw err;
+        res.json(err);
       });
   });
 }

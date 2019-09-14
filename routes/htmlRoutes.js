@@ -45,6 +45,11 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/data", function(req, res){
+    res.render("data", {
+      msg: "Welcome to the data?"
+    });
+  });
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
