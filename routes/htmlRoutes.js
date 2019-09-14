@@ -45,7 +45,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/data", function(req, res){
+  app.get("/data", function(req, res) {
     res.render("data", {
       msg: "Welcome to the data?"
     });
