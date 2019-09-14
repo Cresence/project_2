@@ -9,12 +9,14 @@ module.exports = function(sequelize, Sequelize) {
 
     firstname: {
       type: Sequelize.STRING,
-      notEmpty: true
+      notEmpty: true,
+      allowNull: true
     },
 
     lastname: {
       type: Sequelize.STRING,
-      notEmpty: true
+      notEmpty: true,
+      allowNull: true
     },
 
     username: {
@@ -22,7 +24,8 @@ module.exports = function(sequelize, Sequelize) {
     },
 
     about: {
-      type: Sequelize.TEXT
+      type: Sequelize.TEXT,
+      allowNull: true
     },
 
     email: {

@@ -12,8 +12,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <title>Cinema Snapshot</title>
-  <script src="/public/js/login.js"></script>
-  <script src="/public/js/signup.js"></script>
 
 </head>
 
@@ -59,6 +57,9 @@
       <li class="nav-item">
         <a class="nav-link" href="top_rated" id="top_movi">Top Rated Movies</a>
       </li>    
+      <li class="nav-item">
+        <a class="nav-link" href="data" id="data_movi">Data</a>
+      </li>    
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
@@ -81,7 +82,7 @@
 </div>
 <footer class="footer">
     <div class="container">
-      <p>@ Copyrigt 2019</p>
+      <p>@ Copyright 2019</p>
     </div>
   </footer>
 {{!-- Login ModalPopup --}}
@@ -101,11 +102,11 @@
   
         <div class="form-group">
           <label for="email">Email Id:</label>
-          <input type="email" id="email-id" name="email" class="form-control">
+          <input type="email" id="login-email" name="email" class="form-control">
         </div>
         <div class="form-group">
           <label for="password">Password:</label>
-          <input type="password" id="passwd" name="email" class="form-control">
+          <input type="password" id="login-password" name="email" class="form-control">
         </div>
   
         <button type="submit" id="login-btn" class="btn btn-theme">Login</button>
@@ -138,21 +139,22 @@
         <form class="create-form">
         <div class="form-group">
           <label for="email">Email Id :</label>
-          <input type="text" id="email" name="email" class="form-control">
+          <input type="text" id="signup-email" class="form-control">
         </div>
 
         <div class="form-group">
           <label for="password">Password:</label>
-          <input type="password" id="password" name="password" class="form-control">
+          <input type="password" id="signup-password" class="form-control">
         </div>
         <div class="form-group">
           <label for="password">Confirm Password:</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control">
+          <input type="password" id="signup-confirmPassword" class="form-control">
         </div>
   
         <button type="submit" id="signup-btn" class="btn btn-theme">Register Now</button>
         <button type="submit" id="signup-gmail-btn" class="btn btn-theme">
           <i class="fa fa-google-plus" aria-hidden="true"></i> Sign-Up With Gmail</button>
+          </form>
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">

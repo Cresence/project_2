@@ -4,10 +4,10 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     console.log(db.User);
-    db.User.findAll({}).then(function(dbExamples) {
+    db.User.findAll({}).then(function(dbUsers) {
       res.render("index", {
         msg: "Welcome To My Website!",
-        examples: dbExamples
+        users: dbUsers
       });
     });
   });
@@ -45,6 +45,11 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/data", function(req, res) {
+    res.render("data", {
+      msg: "Welcome to the data?"
+    });
+  });
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");

@@ -1,12 +1,46 @@
 let bCrypt = require("bcrypt-nodejs");
+var db = require("../models");
 var passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
-module.exports = function(passport, user) {
-  const User = user;
-  return User;
-};
+// passport local sign up
+passport.use(
+  new LocalStrategy(
+    {
+      username: "email",
+      password: "password"
+    },
+    function(email, password, done) {
+      const generateHash = function(password) {
+        return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+      };
 
+      db.User.findOne({ where: { email: usernameField } }).then(function(user) {
+        if (user) {
+          return done(null, false, {
+            message: "That email is already taken"
+          });
+        } else {
+          var userPassword = generateHash(password);
+          var data = {
+            email: email,
+            password: userPassword
+          };
+
+          db.User.create(data).then(function(newUser, created) {
+            if (!newUser) {
+              return done(null, false);
+            }
+            if (newUser) {
+              console.log(created);
+              return done(null, newUser);
+            }
+          });
+        }
+      });
+    }
+  )
+);
 // serialize
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -23,42 +57,4 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-// passport local sign up
-passport.use(
-  new LocalStrategy(
-    {
-      usernameField: "email",
-      passwordField: "password",
-      passReqToCallback: true
-    },
-    function(req, email, password, done) {
-      const generateHash = function(password) {
-        return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
-      };
-
-      User.findOne({ where: { email: email } }).then(function(user) {
-        if (user) {
-          return done(null, false, {
-            message: "That email is already taken"
-          });
-        } else {
-          var userPassword = generateHash(password);
-          var data = {
-            email: email,
-            password: userPassword
-          };
-
-          User.create(data).then(function(newUser, created) {
-            if (!newUser) {
-              return done(null, false);
-            }
-            if (newUser) {
-              console.log(created);
-              return done(null, newUser);
-            }
-          });
-        }
-      });
-    }
-  )
-);
+module.exports = passport;
